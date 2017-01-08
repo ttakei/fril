@@ -229,11 +229,11 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
+            'username' => 'cake_user',
+            'password' => 'cake_pass',
+            'database' => 'cakedb',
             'encoding' => 'utf8',
-            'timezone' => 'UTC',
+            'timezone' => 'Asia/Tokyo',
             'flags' => [],
             'cacheMetadata' => true,
             'log' => false,

@@ -1,4 +1,4 @@
-/vendor
-/tmp
-/logs
-/plugins
+vendor
+tmp/*
+logs
+plugins
