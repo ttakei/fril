@@ -46,6 +46,7 @@ class UsersTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Acl.Acl', ['type' => 'requester']);
 
         $this->belongsTo('Groups', [
             'foreignKey' => 'group_id',
@@ -98,8 +99,7 @@ class UsersTable extends Table
 
         $validator
             ->integer('deleted')
-            ->requirePresence('deleted', 'create')
-            ->notEmpty('deleted');
+            ->allowEmpty('deleted');
 
         $validator
             ->dateTime('deleted_date')

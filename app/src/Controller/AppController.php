@@ -16,6 +16,10 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Database\Type;
+use Cake\I18n\Time;
+use Acl\Controller\Component\AclComponent;
+use Cake\Controller\ComponentRegistry;
 
 /**
  * Application Controller
@@ -40,16 +44,34 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
+        //set locale format date
+        Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-mm-yyyy');
+        Time::setToStringFormat('dd/MM/YYYY');
+        //acl
+        $this->loadComponent('Acl.Acl');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-
-        /*
-         * Enable the following components for recommended CakePHP security settings.
-         * see http://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
-        //$this->loadComponent('Security');
-        //$this->loadComponent('Csrf');
+        $this->loadComponent('Auth', [
+            'authorize' => 'Controller',
+            'unauthorizedRedirect' => false,
+            'loginAction' => [
+                'controller' => 'users', 'action' => 'login'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'users', 'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'pages', 'action' => 'index'
+            ],
+            'authError' => 'Did you really think you are allowed to see that?',
+            'authenticate' => [
+                'Form' => [
+                    'userModel' => 'users',
+                    'fields' => ['username' => 'username', 'password' => 'password']
+                ]
+            ],
+            'storage' => 'Session'
+        ]);
     }
 
     /**
@@ -64,6 +86,24 @@ class AppController extends Controller
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
+        }
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        // グループ、ユーザー登録後コメントアウトする
+        //$this->Auth->allow();
+    }
+
+    public function isAuthorized($user)
+    {
+        $acl = new AclComponent(new ComponentRegistry);
+        $return = $acl->check(['Users' => ['id' => $user['id']]], $this->request->controller . '/' . $this->request->action);
+        if ($return) {
+            //$this->viewBuilder()->layout('admin'); // if you have admin template differ of default
+            return true;
+        } else {
+            return false;
         }
     }
 }
