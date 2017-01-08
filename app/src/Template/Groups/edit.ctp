@@ -19,6 +19,18 @@
         <?php
             echo $this->Form->input('name');
         ?>
+        <?php foreach ($EditablePerms as $Acos) : ?>
+            <?php foreach ($Acos as $controllerPath => $actions) : ?>
+                <?php if (!empty($actions)) : ?>
+                    <h4><?= __($controllerPath); ?></h4>
+                    <?php foreach ($actions as $action) : ?>
+                        <?php $check = ($this->AclManager->checkGroup($group, $controllerPath . '/' . $action)) ? 'checked' : null; ?>
+                        <?= $this->Form->checkbox($controllerPath . '/' . $action, [$check]); ?>
+                        <?= $this->Form->label($controllerPath . '/' . $action, $action); ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>

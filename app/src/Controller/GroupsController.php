@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use pedrovalmor\AclManager\Event\PermissionsEditor;
 
 /**
  * Groups Controller
@@ -10,6 +12,12 @@ use App\Controller\AppController;
  */
 class GroupsController extends AppController
 {
+
+    public $helpers = [            
+        'AclManager' => [
+            'className' => 'pedrovalmor/AclManager.AclManager'
+        ]
+    ];
 
     /**
      * Index method
@@ -52,8 +60,21 @@ class GroupsController extends AppController
         if ($this->request->is('post')) {
             $group = $this->Groups->patchEntity($group, $this->request->data);
             if ($this->Groups->save($group)) {
-                $this->Flash->success(__('The group has been saved.'));
+                // デフォルトアクセス全許可にしたい場合は下記のコメントアウトを外す
+                //if (isset($this->request->data['parent_id'])) {
+                //    $parent = $this->request->data['parent_id'];
+                //} else {
+                //    $parent = null;
+                //}
+                //$this->eventManager()->on(new PermissionsEditor());
+                //$perms = new Event('Permissions.addAro', $this, [
+                //    'Aro' => $group,
+                //    'Parent' => $parent,
+                //    'Model' => 'Groups'
+                //]);
+                //$this->eventManager()->dispatch($perms);
 
+                $this->Flash->success(__('The group has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The group could not be saved. Please, try again.'));
@@ -75,18 +96,29 @@ class GroupsController extends AppController
         $group = $this->Groups->get($id, [
             'contain' => []
         ]);
+    
+        $this->loadComponent('pedrovalmor/AclManager.AclManager');
+        $EditablePerms = $this->AclManager->getFormActions();
+    
         if ($this->request->is(['patch', 'post', 'put'])) {
             $group = $this->Groups->patchEntity($group, $this->request->data);
             if ($this->Groups->save($group)) {
+    
+                $this->eventManager()->on(new PermissionsEditor());
+                $perms = new Event('Permissions.editPerms', $this, [
+                    'Aro' => $group,
+                    'datas' => $this->request->data
+                ]);
+                $this->eventManager()->dispatch($perms);
+    
                 $this->Flash->success(__('The group has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The group could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('group'));
-        $this->set('_serialize', ['group']);
+        $this->set(compact('group', 'EditablePerms'));
+        $this->set('_serialize', ['group', 'EditablePerms']);
     }
 
     /**

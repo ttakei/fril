@@ -29,8 +29,8 @@
             echo $this->Form->input('password');
             echo $this->Form->input('group_id', ['options' => $groups]);
             echo $this->Form->input('license_id', ['options' => $licenses]);
-            echo $this->Form->input('deleted');
-            echo $this->Form->input('deleted_date', ['empty' => true]);
+            //echo $this->Form->input('deleted');
+            //echo $this->Form->input('deleted_date', ['empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
