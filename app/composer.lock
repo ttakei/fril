@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6d8c082f656bd3e981932ad404f964fc",
-    "content-hash": "8ff4b464cc5fcf2fbd4731d1f8d4cd00",
+    "hash": "625ed7729a26d4e33274667d3012496f",
+    "content-hash": "47b2d8e9b642d97e7a91afd87109b97e",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -125,6 +125,52 @@
                 "localization"
             ],
             "time": "2014-08-24 00:00:00"
+        },
+        {
+            "name": "cakephp/acl",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/acl.git",
+                "reference": "bcdbc72a3888e2ec8cca78bea530bc05f786895d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/acl/zipball/bcdbc72a3888e2ec8cca78bea530bc05f786895d",
+                "reference": "bcdbc72a3888e2ec8cca78bea530bc05f786895d",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^3.1.0",
+                "cakephp/plugin-installer": "*"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^2.0",
+                "phpunit/phpunit": ">= 4.2"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Acl\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/acl/graphs/contributors"
+                }
+            ],
+            "description": "Acl Plugin for CakePHP 3.x framework",
+            "homepage": "http://cakephp.org",
+            "keywords": [
+                "acl",
+                "cakephp"
+            ],
+            "time": "2016-12-05 08:23:02"
         },
         {
             "name": "cakephp/cakephp",
@@ -257,16 +303,16 @@
         },
         {
             "name": "cakephp/migrations",
-            "version": "1.6.6",
+            "version": "1.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/migrations.git",
-                "reference": "bed3b4d4957a04b355f85a49cf80440092a6c23f"
+                "reference": "f2a5e2915f8924bd36979a1001edeef7cd455f89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/migrations/zipball/bed3b4d4957a04b355f85a49cf80440092a6c23f",
-                "reference": "bed3b4d4957a04b355f85a49cf80440092a6c23f",
+                "url": "https://api.github.com/repos/cakephp/migrations/zipball/f2a5e2915f8924bd36979a1001edeef7cd455f89",
+                "reference": "f2a5e2915f8924bd36979a1001edeef7cd455f89",
                 "shasum": ""
             },
             "require": {
@@ -303,7 +349,7 @@
                 "cakephp",
                 "migrations"
             ],
-            "time": "2017-01-01 17:29:48"
+            "time": "2017-01-07 16:45:31"
         },
         {
             "name": "cakephp/plugin-installer",
@@ -344,6 +390,57 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2016-04-28 03:01:34"
+        },
+        {
+            "name": "friendsofcake/bootstrap-ui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfCake/bootstrap-ui.git",
+                "reference": "aebc4794d63c4e2b2956de7d500746099776fbf4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfCake/bootstrap-ui/zipball/aebc4794d63c4e2b2956de7d500746099776fbf4",
+                "reference": "aebc4794d63c4e2b2956de7d500746099776fbf4",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "dev-master",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "BootstrapUI\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jad Bitar",
+                    "homepage": "http://jadb.io",
+                    "role": "Author"
+                },
+                {
+                    "name": "Others",
+                    "homepage": "https://github.com/friendsofcake/bootstrap-ui/graphs/contributors"
+                }
+            ],
+            "description": "Twitter Bootstrap 3 support for CakePHP 3",
+            "homepage": "http://github.com/friendsofcake/bootstrap-ui",
+            "keywords": [
+                "bootstrap",
+                "cakephp",
+                "twitter"
+            ],
+            "time": "2017-01-02 09:41:34"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -398,6 +495,51 @@
                 "php mobile detect"
             ],
             "time": "2016-11-11 14:56:25"
+        },
+        {
+            "name": "pedrovalmor/cakephp3-aclmanager",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pedrovalmor/cakephp3-aclmanager.git",
+                "reference": "63cb6038fa349901089f8f0cbb40ca55df757206"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pedrovalmor/cakephp3-aclmanager/zipball/63cb6038fa349901089f8f0cbb40ca55df757206",
+                "reference": "63cb6038fa349901089f8f0cbb40ca55df757206",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/acl": "dev-master",
+                "cakephp/cakephp": "~3.0",
+                "php": ">=5.4.16"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "dev-master"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "pedrovalmor\\AclManager\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Pedro Valmor",
+                    "email": "pedrovalmor@gmail.com",
+                    "homepage": "https://github.com/pedrovalmor"
+                }
+            ],
+            "description": "CakePHP3 ACL Manager",
+            "homepage": "https://github.com/pedrovalmor/cakephp3-aclmanager",
+            "keywords": [
+                "acl",
+                "cakephp3",
+                "plugin"
+            ],
+            "time": "2016-08-01 20:05:04"
         },
         {
             "name": "psr/http-message",
@@ -1418,6 +1560,9 @@
     "aliases": [],
     "minimum-stability": "beta",
     "stability-flags": {
+        "cakephp/acl": 20,
+        "pedrovalmor/cakephp3-aclmanager": 20,
+        "friendsofcake/bootstrap-ui": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,

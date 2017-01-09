@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bin/cake bake model all --force
+bin/cake bake controller all --force
+bin/cake bake template all --force
