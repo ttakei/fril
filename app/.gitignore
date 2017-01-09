@@ -1,4 +1,5 @@
-vendor
+vendor/*
 tmp/*
-logs
-plugins
+logs/*
+plugis/*
+bower_components/*

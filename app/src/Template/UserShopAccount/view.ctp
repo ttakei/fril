@@ -29,10 +29,6 @@
             <td><?= h($userShopAccount->shop_username) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Shop Password') ?></th>
-            <td><?= h($userShopAccount->shop_password) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Cookie File') ?></th>
             <td><?= h($userShopAccount->cookie_file) ?></td>
         </tr>

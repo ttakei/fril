@@ -1,38 +1,14 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Groups'), ['controller' => 'Groups', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Group'), ['controller' => 'Groups', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Licenses'), ['controller' => 'Licenses', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New License'), ['controller' => 'Licenses', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List User Shop Account'), ['controller' => 'UserShopAccount', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User Shop Account'), ['controller' => 'UserShopAccount', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List User Shop Apply Order Tmpl'), ['controller' => 'UserShopApplyOrderTmpl', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User Shop Apply Order Tmpl'), ['controller' => 'UserShopApplyOrderTmpl', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List User Shop Evaluate Tmpl'), ['controller' => 'UserShopEvaluateTmpl', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User Shop Evaluate Tmpl'), ['controller' => 'UserShopEvaluateTmpl', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List User Shop Receive Fee Tmpl'), ['controller' => 'UserShopReceiveFeeTmpl', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User Shop Receive Fee Tmpl'), ['controller' => 'UserShopReceiveFeeTmpl', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List User Shop Relist Cron'), ['controller' => 'UserShopRelistCron', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User Shop Relist Cron'), ['controller' => 'UserShopRelistCron', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List User Shop Ship Tmpl'), ['controller' => 'UserShopShipTmpl', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User Shop Ship Tmpl'), ['controller' => 'UserShopShipTmpl', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+<?php
+$this->start('tb_sidebar');
+echo $this->element('sidebar', array('user' => $user, 'user_shop_account' => $user_shop_account, 'sidebar_profile' => true));
+$this->end('tb_sidebar');
+?>
 <div class="users view large-9 medium-8 columns content">
     <h3><?= h($user->id) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Username') ?></th>
             <td><?= h($user->username) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Group') ?></th>
@@ -72,7 +48,6 @@
                 <th scope="col"><?= __('User Id') ?></th>
                 <th scope="col"><?= __('Shop Id') ?></th>
                 <th scope="col"><?= __('Shop Username') ?></th>
-                <th scope="col"><?= __('Shop Password') ?></th>
                 <th scope="col"><?= __('Cookie File') ?></th>
                 <th scope="col"><?= __('Request Header Id') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
@@ -87,7 +62,6 @@
                 <td><?= h($userShopAccount->user_id) ?></td>
                 <td><?= h($userShopAccount->shop_id) ?></td>
                 <td><?= h($userShopAccount->shop_username) ?></td>
-                <td><?= h($userShopAccount->shop_password) ?></td>
                 <td><?= h($userShopAccount->cookie_file) ?></td>
                 <td><?= h($userShopAccount->request_header_id) ?></td>
                 <td><?= h($userShopAccount->created) ?></td>

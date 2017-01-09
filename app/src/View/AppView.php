@@ -13,7 +13,9 @@
  */
 namespace App\View;
 
-use Cake\View\View;
+//use Cake\View\View;
+use BootstrapUI\View\UIView;
+use App\View\Helper;
 
 /**
  * Application View
@@ -22,8 +24,12 @@ use Cake\View\View;
  *
  * @link http://book.cakephp.org/3.0/en/views.html#the-app-view
  */
-class AppView extends View
+//class AppView extends View
+class AppView extends UIView
 {
+    //public $layout = 'BootstrapUI.default';
+    //public $layout = 'BootstrapUI.examples/dashboard';
+    public $layout = 'TwitterBootstrap/dashboard';
 
     /**
      * Initialization hook method.
@@ -36,5 +42,7 @@ class AppView extends View
      */
     public function initialize()
     {
+        parent::initialize();
+        $this->loadHelper('MyHtml', ['className' => 'MyHtml']);
     }
 }

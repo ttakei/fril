@@ -96,7 +96,6 @@
                 <td><?= h($userShopAccount->user_id) ?></td>
                 <td><?= h($userShopAccount->shop_id) ?></td>
                 <td><?= h($userShopAccount->shop_username) ?></td>
-                <td><?= h($userShopAccount->shop_password) ?></td>
                 <td><?= h($userShopAccount->cookie_file) ?></td>
                 <td><?= h($userShopAccount->request_header_id) ?></td>
                 <td><?= h($userShopAccount->created) ?></td>

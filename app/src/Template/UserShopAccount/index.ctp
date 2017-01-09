@@ -19,7 +19,6 @@
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('shop_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('shop_username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('shop_password') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('cookie_file') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('request_header_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -36,7 +35,6 @@
                 <td><?= $userShopAccount->has('user') ? $this->Html->link($userShopAccount->user->id, ['controller' => 'Users', 'action' => 'view', $userShopAccount->user->id]) : '' ?></td>
                 <td><?= $userShopAccount->has('shop') ? $this->Html->link($userShopAccount->shop->name, ['controller' => 'Shops', 'action' => 'view', $userShopAccount->shop->id]) : '' ?></td>
                 <td><?= h($userShopAccount->shop_username) ?></td>
-                <td><?= h($userShopAccount->shop_password) ?></td>
                 <td><?= h($userShopAccount->cookie_file) ?></td>
                 <td><?= $userShopAccount->has('request_header') ? $this->Html->link($userShopAccount->request_header->id, ['controller' => 'RequestHeaders', 'action' => 'view', $userShopAccount->request_header->id]) : '' ?></td>
                 <td><?= h($userShopAccount->created) ?></td>
