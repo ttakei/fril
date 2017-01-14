@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Groups
  * @property \Cake\ORM\Association\BelongsTo $Licenses
- * @property \Cake\ORM\Association\HasMany $UserShopAccount
+ * @property \Cake\ORM\Association\HasMany $UserShopAccounts
  * @property \Cake\ORM\Association\HasMany $UserShopApplyOrderTmpl
  * @property \Cake\ORM\Association\HasMany $UserShopEvaluateTmpl
  * @property \Cake\ORM\Association\HasMany $UserShopReceiveFeeTmpl
@@ -56,7 +56,7 @@ class UsersTable extends Table
             'foreignKey' => 'license_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('UserShopAccount', [
+        $this->hasMany('UserShopAccounts', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('UserShopApplyOrderTmpl', [

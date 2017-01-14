@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Shops Model
  *
  * @property \Cake\ORM\Association\HasMany $Licenses
- * @property \Cake\ORM\Association\HasMany $UserShopAccount
+ * @property \Cake\ORM\Association\HasMany $UserShopAccounts
  * @property \Cake\ORM\Association\HasMany $UserShopApplyOrderTmpl
  * @property \Cake\ORM\Association\HasMany $UserShopEvaluateTmpl
  * @property \Cake\ORM\Association\HasMany $UserShopReceiveFeeTmpl
@@ -49,7 +49,7 @@ class ShopsTable extends Table
         $this->hasMany('Licenses', [
             'foreignKey' => 'shop_id'
         ]);
-        $this->hasMany('UserShopAccount', [
+        $this->hasMany('UserShopAccounts', [
             'foreignKey' => 'shop_id'
         ]);
         $this->hasMany('UserShopApplyOrderTmpl', [

@@ -23,7 +23,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class UserShopAccountTable extends Table
+class UserShopAccountsTable extends Table
 {
 
     /**
@@ -36,7 +36,7 @@ class UserShopAccountTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('user_shop_account');
+        $this->table('user_shop_accounts');
         $this->displayField('id');
         $this->primaryKey('id');
 
@@ -75,12 +75,14 @@ class UserShopAccountTable extends Table
             ->allowEmpty('shop_password');
 
         $validator
-            ->allowEmpty('cookie_file');
+            ->allowEmpty('shop_nickname');
+
+        $validator
+            ->allowEmpty('cookie');
 
         $validator
             ->integer('deleted')
-            ->requirePresence('deleted', 'create')
-            ->notEmpty('deleted');
+            ->allowEmpty('deleted');
 
         $validator
             ->dateTime('deleted_date')

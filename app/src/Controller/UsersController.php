@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -11,8 +12,6 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController
 {
-    public $me;
-    public $is_admin = false;
     public $user_editable_key = ['username', 'password'];
 
     /**
@@ -31,9 +30,8 @@ class UsersController extends AppController
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
-        $this->set('user', $this->me);
-        $this->set('user_shop_account',
-            $this->get_user_shop_account_current($this->me->user_shop_account));
+        $this->set('current_user', $this->current_user);
+        $this->set('current_user_shop_account', $this->current_user_shop_account);
         $this->set('_serialize', ['users']);
     }
 
@@ -51,15 +49,14 @@ class UsersController extends AppController
                 return $this->redirect(['action'=>'edit']);
             }
             $user = $this->Users->get($id, [
-                'contain' => ['UserShopAccount','Groups']
+                'contain' => ['UserShopAccounts','Groups']
             ]);
         } else {
-            $user = $this->me;
+            $user = $this->current_user;
         }
 
-        $this->set('user', $user);
-        $this->set('user_shop_account',
-            $this->get_user_shop_account_current($user->user_shop_account));
+        $this->set('current_user', $user);
+        $this->set('current_user_shop_account', $this->current_user_shop_account);
         $this->set('_serialize', ['user']);
     }
 
@@ -87,9 +84,8 @@ class UsersController extends AppController
         $groups = $this->Users->Groups->find('list', ['limit' => 200]);
         $licenses = $this->Users->Licenses->find('list', ['limit' => 200]);
         $this->set(compact('user', 'groups', 'licenses'));
-        $this->set('user', $this->me);
-        $this->set('user_shop_account',
-            $this->get_user_shop_account_current($this->me->user_shop_account));
+        $this->set('current_user', $this->current_user);
+        $this->set('current_user_shop_account', $this->current_user_shop_account);
         $this->set('_serialize', ['user']);
     }
 
@@ -106,11 +102,9 @@ class UsersController extends AppController
             if (!$this->is_admin) {
                 return $this->redirect(['action'=>'edit']);
             }
-            $user = $this->Users->get($id, [
-                'contain' => ['UserShopAccount','Groups']
-            ]);
+            $user = $this->Users->get($id);
         } else {
-            $user = $this->me;
+            $user = $this->current_user;
         }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -123,7 +117,7 @@ class UsersController extends AppController
             }
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success('設定を保存しました。');
 
                 if ($this->is_admin) {
                     return $this->redirect(['action' => 'index']);
@@ -131,7 +125,7 @@ class UsersController extends AppController
                     return $this->redirect(['action' => 'edit']);
                 }
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error('設定の保存に失敗しました。');
             }
         }
 
@@ -139,8 +133,8 @@ class UsersController extends AppController
         $licenses = $this->Users->Licenses->find('list', ['limit' => 200]);
         $this->set(compact('user', 'groups', 'licenses'));
         $this->set('is_admin', $this->is_admin);
-        $this->set('user_shop_account',
-            $this->get_user_shop_account_current($user->user_shop_account));
+        $this->set('current_user', $this->current_user);
+        $this->set('current_user_shop_account', $this->current_user_shop_account);
         $this->set('_serialize', ['user']);
     }
 
@@ -171,13 +165,6 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow(['login']);
-        $request_user = $this->Auth->user();
-        if (!empty($request_user['id'])) {
-            $this->me = $this->Users->get($request_user['id'], [
-                'contain' => ['UserShopAccount','Groups']
-            ]);
-            $this->is_admin = $this->is_admin($this->me->group);
-        }
     }
 
     public function login()
@@ -187,6 +174,14 @@ class UsersController extends AppController
 
             if ($user) {
                 $this->Auth->setUser($user);
+                $user_shop_account_id = $this->Cookie->read('usai');
+                $user_shop_accounts_tbl = TableRegistry::get('user_shop_accounts');
+                if (empty($user_shop_account_id)) {
+                    $this->current_user_shop_account = $user_shop_accounts_tbl->find()->where(['user_id'=> $user['id']])->first();
+                    $this->Cookie->write('usai', $this->current_user_shop_account->id);
+                } else {
+                    $this->current_user_shop_account = $user_shop_accounts_tbl->get($user_shop_account_id);
+                }
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('ログイン情報が間違っています');
@@ -196,28 +191,5 @@ class UsersController extends AppController
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
-    }
-
-    public function get_user_shop_account_current($user_shop_accounts) {
-        if (!empty($user_shop_accounts)) {
-            if (empty($this->request->account)) {
-                return $user_shop_accounts[0];
-            } else {
-                foreach ($user_shop_accounts as $account) {
-                    if ($account->id == $this->request->account) {
-                        return $account;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    public function is_admin($group) {
-        if (!empty($group) && $group->name == 'admin') {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

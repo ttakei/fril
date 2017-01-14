@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * RequestHeaders Model
  *
- * @property \Cake\ORM\Association\HasMany $UserShopAccount
+ * @property \Cake\ORM\Association\HasMany $UserShopAccounts
  *
  * @method \App\Model\Entity\RequestHeader get($primaryKey, $options = [])
  * @method \App\Model\Entity\RequestHeader newEntity($data = null, array $options = [])
@@ -36,7 +36,7 @@ class RequestHeadersTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->hasMany('UserShopAccount', [
+        $this->hasMany('UserShopAccounts', [
             'foreignKey' => 'request_header_id'
         ]);
     }

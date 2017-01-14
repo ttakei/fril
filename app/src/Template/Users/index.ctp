@@ -3,7 +3,7 @@ $this->start('title');
 echo 'ユーザ一覧';
 $this->end('title');
 $this->start('tb_sidebar');
-echo $this->element('sidebar', array('user' => $user, 'user_shop_account' => $user_shop_account, 'sidebar_profile' => true));
+echo $this->element('sidebar', array('current_user' => $current_user, 'current_user_shop_account' => $current_user_shop_account, 'sidebar_profile' => true));
 $this->end('tb_sidebar');
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">

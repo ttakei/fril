@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $shop_id
  * @property string $shop_username
  * @property string $shop_password
- * @property string $cookie_file
+ * @property string $cookie
  * @property int $request_header_id
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
