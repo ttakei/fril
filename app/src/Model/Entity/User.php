@@ -20,7 +20,7 @@ use Cake\Auth\DefaultPasswordHasher;
  *
  * @property \App\Model\Entity\Group $group
  * @property \App\Model\Entity\License $license
- * @property \App\Model\Entity\UserShopAccount[] $user_shop_account
+ * @property \App\Model\Entity\UserShopAccount[] $user_shop_accounts
  * @property \App\Model\Entity\UserShopApplyOrderTmpl[] $user_shop_apply_order_tmpl
  * @property \App\Model\Entity\UserShopEvaluateTmpl[] $user_shop_evaluate_tmpl
  * @property \App\Model\Entity\UserShopReceiveFeeTmpl[] $user_shop_receive_fee_tmpl
