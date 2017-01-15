@@ -136,9 +136,9 @@ $this->prepend('script', $this->Html->script(['jquery/jquery', 'bootstrap/bootst
     <?php
     echo $this->fetch('tb_body_start');
     echo $this->fetch('tb_flash');
+    echo $this->fetch('script');
     echo $this->fetch('content');
     echo $this->fetch('tb_footer');
-    echo $this->fetch('script');
     echo $this->fetch('tb_body_end');
     ?>
 
