@@ -2,6 +2,7 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
+use Cake\Log\Log;
 
 class BrowserComponent extends Component
 {
@@ -41,7 +42,7 @@ class BrowserComponent extends Component
                 $this->cookie = static::COOKIE. $cookie;
             }
         } else {
-            $this->cookie = COOKIE. $cookie;
+            $this->cookie = static::COOKIE. $cookie;
         }
 
         if (file_exists($this->cookie) === true) {
@@ -187,7 +188,6 @@ class BrowserComponent extends Component
         $result['request'] = array(
             'header' => $this->header,
             'url' => $url,
-            //'field' => $field,
             'field' => $field_raw,
         );
 

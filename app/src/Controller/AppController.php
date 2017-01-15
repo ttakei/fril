@@ -22,6 +22,8 @@ use Acl\Controller\Component\AclComponent;
 use Cake\Controller\ComponentRegistry;
 use Cake\ORM\TableRegistry;
 use App\Controller\Component\FrilLogin;
+use App\Controller\Component\FrilItem;
+use App\Controller\Component\Image;
 
 /**
  * Application Controller
@@ -68,7 +70,7 @@ class AppController extends Controller
             'loginRedirect' => [
                 'controller' => 'users', 'action' => 'edit'
             ],
-            'authError' => 'Did you really think you are allowed to see that?',
+            'authError' => '',
             'authenticate' => [
                 'Form' => [
                     'userModel' => 'users',
@@ -79,6 +81,8 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Cookie');
         $this->loadComponent('FrilLogin');
+        $this->loadComponent('FrilItem');
+        $this->loadComponent('Image');
         $this->Cookie->config();
     }
 

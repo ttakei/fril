@@ -3,7 +3,7 @@
     <li><a data-toggle="collapse" data-parent="#nav_sidebar" href="#collapse_exhibit" class="<?php !empty($sidebar_exhibit)?'collapsed':'' ?>">出品</a></li>
     <li>
         <div id="collapse_exhibit" class="collapse list-group">
-            <?= $this->MyHtml->sidebar_link($this->request, '一括出品', ['controller' => 'fril_item_bulk_exhibit', 'action' => 'index', $current_user_shop_account->id]) ?>
+            <?= $this->MyHtml->sidebar_link($this->request, '一括出品', ['controller' => 'fril_items', 'action' => 'bulk']) ?>
             <?= $this->MyHtml->sidebar_link($this->request, '出品中', ['controller' => 'fril_items', 'action' => 'selling', $current_user_shop_account->id]) ?>
             <?= $this->MyHtml->sidebar_link($this->request, '取引中', ['controller' => 'fril_items', 'action' => 'trading', $current_user_shop_account->id]) ?>
             <?= $this->MyHtml->sidebar_link($this->request, '売却済', ['controller' => 'fril_items', 'action' => 'sold', $current_user_shop_account->id]) ?>
@@ -15,7 +15,7 @@
     <li><a data-toggle="collapse" data-parent="#nav_sidebar" href="#collapse_exhibit_setting" class="<?php !empty($sidebar_exhibit_setting)?'collapsed':'' ?>">出品設定</a></li>
     <li>
         <div id="collapse_exhibit_setting" class="panel-collapse collapse">
-            <?= $this->MyHtml->sidebar_link($this->request, '再出品設定', ['controller' => 'fril_item_setting', 'action' => 'cron', $current_user_shop_account->id]) ?>
+            <?= $this->MyHtml->sidebar_link($this->request, '再出品設定', ['controller' => 'item_setting', 'action' => 'cron']) ?>
             <?= $this->MyHtml->sidebar_link($this->request, 'リクエストヘッダー設定', ['controller' => 'fril_item_setting', 'action' => 'header', $current_user_shop_account->id]) ?>
         </div>
     </li>
