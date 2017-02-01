@@ -6,6 +6,7 @@ use Cake\ORM\TableRegistry;
 
 class FrilDataComponent extends Component
 {
+/*
     public $size = array(
         '10001' => '~XS',
         '10003' => 'S',
@@ -104,11 +105,27 @@ class FrilDataComponent extends Component
         '0' => 'なし',
         '1' => 'あり',
     );
-
+*/
     protected $data_tbl;
 
     public function __construct() {
         $this->data_tbl = TableRegistry::get('fril_data');
+    }
+
+    public function __call($name, $args) {
+        if (!isset($args[0])) {
+            return null;
+        }
+        $id = $args[0];
+        $result = $this->data_tbl->find()
+            ->where(['type' => $name, 'id' => $id])
+            ->first();
+
+        if (empty($result['name'])) {
+            return null;
+        }
+
+        return $result['name'];
     }
 
     public function getCategory($id) {
@@ -130,7 +147,7 @@ class FrilDataComponent extends Component
 
     public function getBrand($id) {
         $result = $this->data_tbl->find()
-            ->where(['brand' => 'category', 'id' => $id])
+            ->where(['type' => 'brand', 'id' => $id])
             ->first();
 
         if (empty($result['name'])) {
