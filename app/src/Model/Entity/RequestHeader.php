@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $useragent
  *
- * @property \App\Model\Entity\UserShopAccount[] $user_shop_account
+ * @property \App\Model\Entity\UserShopAccount[] $user_shop_accounts
  */
 class RequestHeader extends Entity
 {

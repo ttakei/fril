@@ -20,6 +20,10 @@ use Cake\Database\Type;
 use Cake\I18n\Time;
 use Acl\Controller\Component\AclComponent;
 use Cake\Controller\ComponentRegistry;
+use Cake\ORM\TableRegistry;
+use App\Controller\Component\FrilLogin;
+use App\Controller\Component\FrilItem;
+use App\Controller\Component\Image;
 
 /**
  * Application Controller
@@ -31,6 +35,9 @@ use Cake\Controller\ComponentRegistry;
  */
 class AppController extends Controller
 {
+    public $current_user;
+    public $current_user_shop_account;
+    public $is_admin = false;
 
     /**
      * Initialization hook method.
@@ -61,9 +68,9 @@ class AppController extends Controller
                 'controller' => 'users', 'action' => 'login'
             ],
             'loginRedirect' => [
-                'controller' => 'pages', 'action' => 'index'
+                'controller' => 'users', 'action' => 'edit'
             ],
-            'authError' => 'Did you really think you are allowed to see that?',
+            'authError' => '',
             'authenticate' => [
                 'Form' => [
                     'userModel' => 'users',
@@ -72,6 +79,11 @@ class AppController extends Controller
             ],
             'storage' => 'Session'
         ]);
+        $this->loadComponent('Cookie');
+        $this->loadComponent('FrilLogin');
+        $this->loadComponent('FrilItem');
+        $this->loadComponent('Image');
+        $this->Cookie->config();
     }
 
     /**
@@ -93,6 +105,29 @@ class AppController extends Controller
     {
         // グループ、ユーザー登録後コメントアウトする
         //$this->Auth->allow();
+        $this->Auth->allow(['login']);
+        $current_user_arr = $this->Auth->user();
+        if (!empty($current_user_arr)) {
+            $users_tbl = TableRegistry::get('users');
+            $this->current_user = $users_tbl->get($current_user_arr['id']);
+            $groups_tbl = TableRegistry::get('groups');
+            $group = $groups_tbl->get($this->current_user->group_id);
+            $this->is_admin = $this->is_admin($group);
+        }
+
+        $user_shop_account_id = $this->Cookie->read('usai');
+        if (!empty($user_shop_account_id)) {
+            $user_shop_accounts_tbl = TableRegistry::get('user_shop_accounts');
+            $this->current_user_shop_account = $user_shop_accounts_tbl->get($user_shop_account_id);
+        } elseif (!empty($this->current_user)) {
+            $user_shop_accounts_tbl = TableRegistry::get('user_shop_accounts');
+            $user_shop_account = $user_shop_accounts_tbl->find()
+                ->where(['user_id'=> $this->current_user->id])->first();
+            if (!empty($user_shop_account)) {
+                $this->Cookie->write('usai', $user_shop_account->id);
+                $this->current_user_shop_account = $user_shop_account;
+            }
+        }
     }
 
     public function isAuthorized($user)
@@ -101,6 +136,14 @@ class AppController extends Controller
         $return = $acl->check(['Users' => ['id' => $user['id']]], $this->request->controller . '/' . $this->request->action);
         if ($return) {
             //$this->viewBuilder()->layout('admin'); // if you have admin template differ of default
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function is_admin($group) {
+        if (!empty($group) && $group->name == 'admin') {
             return true;
         } else {
             return false;

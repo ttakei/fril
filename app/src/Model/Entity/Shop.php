@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $modified
  *
  * @property \App\Model\Entity\License[] $licenses
- * @property \App\Model\Entity\UserShopAccount[] $user_shop_account
+ * @property \App\Model\Entity\UserShopAccount[] $user_shop_accounts
  * @property \App\Model\Entity\UserShopApplyOrderTmpl[] $user_shop_apply_order_tmpl
  * @property \App\Model\Entity\UserShopEvaluateTmpl[] $user_shop_evaluate_tmpl
  * @property \App\Model\Entity\UserShopReceiveFeeTmpl[] $user_shop_receive_fee_tmpl

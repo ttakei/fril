@@ -34,7 +34,7 @@ class RequestHeadersController extends AppController
     public function view($id = null)
     {
         $requestHeader = $this->RequestHeaders->get($id, [
-            'contain' => ['UserShopAccount']
+            'contain' => ['UserShopAccounts']
         ]);
 
         $this->set('requestHeader', $requestHeader);

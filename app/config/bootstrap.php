@@ -213,6 +213,7 @@ Type::build('datetime')
  *
  */
 Plugin::load('Acl', ['bootstrap' => true]);
+Plugin::load('BootstrapUI');
 
 /*
  * Only try to load DebugKit in development mode

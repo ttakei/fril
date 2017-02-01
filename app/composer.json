@@ -11,7 +11,8 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "cakephp/acl": "dev-master",
-        "pedrovalmor/cakephp3-aclmanager": "dev-master"
+        "pedrovalmor/cakephp3-aclmanager": "dev-master",
+        "friendsofcake/bootstrap-ui": "dev-master"
     },
     "require-dev": {
         "psy/psysh": "@stable",
